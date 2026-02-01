@@ -1,0 +1,73 @@
+.shop-container {
+  width: 100%; /* Full width of the screen */
+  font-family: Arial, sans-serif;
+  /* Removed max-width and margin: 0 auto; to prevent limiting/centering */
+}
+
+.header {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffb6c1; /* Light pink background */
+  width: 100%;
+}
+
+.nav {
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+.products {
+  padding: 20px;
+  width: 100%;
+}
+
+.product-list {
+  display: flex;
+  justify-content: space-around; /* Spread products across full width */
+  flex-wrap: wrap; /* Wrap if needed, but fixed */
+}
+
+.product {
+  border: 2px solid #ddd; /* Slightly thicker border for more prominence */
+  padding: 10px;
+  text-align: center;
+  width: 300px; /* Larger fixed width for full-size feel */
+  margin: 10px;
+}
+
+.product button {
+  background-color: #ffb6c1; /* Pink background (matching header) */
+  color: white; /* White text for contrast */
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px; /* Optional: Rounded corners for a nicer look */
+}
+
+.product button:hover {
+  background-color: #ff69b4; /* Darker pink on hover for interactivity */
+}
+
+.product img {
+  width: 280px; /* Slightly larger image size */
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: FF9898;
+  width: 100%;
+}
