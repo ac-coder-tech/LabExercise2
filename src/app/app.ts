@@ -1,10 +1,12 @@
 import { Component, signal } from '@angular/core';
+import { Products } from './products/products.component';  // ✅ matches new filename
 
 @Component({
   selector: 'app-root',
-  imports: [],  // Empty, since RouterOutlet was unused
+  standalone: true,
+  imports: [Products],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   protected readonly title = signal('My Angular Ice Cream Shop');

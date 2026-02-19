@@ -1,0 +1,36 @@
+<main class="products">
+  <h2>🍦 Choose Your Flavors</h2>
+
+  <!-- Category filter -->
+  <div class="filter">
+    <label for="category">Filter by category:</label>
+    <select id="category" [(ngModel)]="selectedCategory">
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+  </div>
+
+  <!-- Product cards -->
+  <div class="product-list">
+    <div class="product" *ngFor="let item of filteredProducts">
+      <img [src]="item.image" [alt]="item.name">
+      <h3>{{ item.name }}</h3>
+      <p>₱{{ item.price }}</p>
+      <p>Category: {{ item.category }}</p>
+
+      <p *ngIf="item.available; else outStock">Available</p>
+      <ng-template #outStock>
+        <p style="color:red;">Out of Stock</p>
+      </ng-template>
+
+      <button (click)="addToCart(item)" [disabled]="!item.available">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <!-- Cart info -->
+  <div class="cart-counter">
+    <p>🛒 Cart Items: {{ cartCount }}</p>
+    <p>💰 Total Price: ₱{{ totalPrice }}</p>
+  </div>
+</main>
