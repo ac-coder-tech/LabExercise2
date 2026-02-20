@@ -28,9 +28,9 @@ export class Products {
     { name: 'Caramel Cone', price: 99, category: 'Specialty', available: true, image: '/CARAMELSS.jpg' },
     { name: 'Avocado Cone', price: 99, category: 'Fruity', available: true, image: '/avocado.jpg' },
     { name: 'Mango Cone', price: 99, category: 'Fruity', available: true, image: '/MANGO.jpg' },
-    { name: 'Toppings', price: 99, category: 'Add-ons', available: true, image: '/TOPPINGS.jpg' },
+    { name: 'Toppings', price: 10, category: 'Add-ons', available: true, image: '/TOPPINGS.jpg' },
     { name: 'Ube Cone', price: 99, category: 'Specialty', available: true, image: '/UBE.jpg' },
-    { name: '3 Different Flavors', price: 99, category: 'Combo', available: true, image: '/3FLAVORS.jpg' }
+    { name: '3 Different Flavors', price: 130, category: 'Combo', available: true, image: '/3FLAVORS.jpg' }
   ];
 
   selectedCategory: string = 'All';
