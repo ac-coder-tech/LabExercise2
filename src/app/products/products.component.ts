@@ -19,7 +19,7 @@ interface Product {
 })
 export class Products {
   products: Product[] = [
-    { name: 'Chocolate Cone', price: 50, category: 'Classic', available: true, image: '/Chocolate.jpg.jpg' },
+    { name: 'Chocolate Cone', price: 50, category: 'Classic', available: false, image: '/Chocolate.jpg.jpg' },
     { name: 'Vanilla Cone', price: 50, category: 'Classic', available: true, image: '/Vanilla.jpg' },
     { name: 'Strawberry Cone', price: 55, category: 'Fruity', available: true, image: '/Strawberry.jpg.jpg' },
     { name: 'Matcha Cone', price: 99, category: 'Specialty', available: true, image: '/matcha.jpg' },
@@ -35,37 +35,57 @@ export class Products {
 
   selectedCategory: string = 'All';
   cart: Product[] = [];
+  cartOpen: boolean = false;
 
-  // Add product to cart
   addToCart(product: Product) {
-    if (!product.available) return;
+    if (!product.available) {
+      alert(`Sorry, ${product.name} is out of stock!`);
+      return;
+    }
     this.cart.push(product);
     alert(`${product.name} added to cart!`);
   }
 
-  // Remove product from cart by index
   removeFromCart(index: number) {
+    const removedItem = this.cart[index];
     this.cart.splice(index, 1);
+    alert(`${removedItem.name} removed from cart!`);
   }
 
-  // Filtered products by category
+  clearCart() {
+    this.cart = [];
+    alert('Cart cleared!');
+  }
+
+  checkout() {
+    if (this.cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    const total = this.cart.reduce((sum, item) => sum + item.price, 0);
+    alert(`Thank you for your order!\nTotal: ₱${total}\nYour ice cream will be ready soon!`);
+    this.cart = [];
+    this.cartOpen = false;
+  }
+
+  toggleCart() {
+    this.cartOpen = !this.cartOpen;
+  }
+
   get filteredProducts(): Product[] {
     if (this.selectedCategory === 'All') return this.products;
     return this.products.filter(p => p.category === this.selectedCategory);
   }
 
-  // Unique categories
   get categories(): string[] {
     const cats = this.products.map(p => p.category);
     return ['All', ...Array.from(new Set(cats))];
   }
 
-  // Cart total items
   get cartCount(): number {
     return this.cart.length;
   }
 
-  // Cart total price
   get totalPrice(): number {
     return this.cart.reduce((sum, item) => sum + item.price, 0);
   }

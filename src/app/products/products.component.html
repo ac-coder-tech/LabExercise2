@@ -1,6 +1,11 @@
 <main class="products">
   <h2>🍦 Choose Your Flavors</h2>
 
+  <!-- Cart Button -->
+  <button class="cart-toggle-btn" (click)="toggleCart()">
+    🛒 Cart ({{ cartCount }})
+  </button>
+
   <!-- Category filter -->
   <div class="filter">
     <label for="category">Filter by category:</label>
@@ -17,20 +22,49 @@
       <p>₱{{ item.price }}</p>
       <p>Category: {{ item.category }}</p>
 
-      <p *ngIf="item.available; else outStock">Available</p>
+      <p *ngIf="item.available; else outStock" style="color: green;">✓ Available</p>
       <ng-template #outStock>
-        <p style="color:red;">Out of Stock</p>
+        <p style="color: red;">✗ Out of Stock</p>
       </ng-template>
 
-      <button (click)="addToCart(item)" [disabled]="!item.available">
+      <button (click)="addToCart(item)">
         Add to Cart
       </button>
     </div>
   </div>
 
-  <!-- Cart info -->
-  <div class="cart-counter">
-    <p>🛒 Cart Items: {{ cartCount }}</p>
-    <p>💰 Total Price: ₱{{ totalPrice }}</p>
+  <!-- Cart Sidebar -->
+  <div class="cart-overlay" *ngIf="cartOpen" (click)="toggleCart()"></div>
+  <div class="cart-sidebar" [class.open]="cartOpen">
+    <div class="cart-header">
+      <h3>🛒 Your Cart</h3>
+      <button class="close-btn" (click)="toggleCart()">✕</button>
+    </div>
+
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cart; let i = index">
+        <img [src]="item.image" [alt]="item.name">
+        <div class="cart-item-details">
+          <h4>{{ item.name }}</h4>
+          <p>₱{{ item.price }}</p>
+        </div>
+        <button class="remove-btn" (click)="removeFromCart(i)">✕</button>
+      </div>
+
+      <div class="empty-cart" *ngIf="cart.length === 0">
+        <p>🛒 Your cart is empty</p>
+        <p>Add some ice cream!</p>
+      </div>
+    </div>
+
+    <div class="cart-footer" *ngIf="cart.length > 0">
+      <div class="cart-total">
+        <h3>Total: ₱{{ totalPrice }}</h3>
+      </div>
+      <div class="cart-buttons">
+        <button class="clear-btn" (click)="clearCart()">Clear Cart</button>
+        <button class="checkout-btn" (click)="checkout()">Checkout</button>
+      </div>
+    </div>
   </div>
 </main>
